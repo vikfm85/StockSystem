@@ -5,7 +5,7 @@
 	prefix="security"%>
 
 <!DOCTYPE html>
-<html lang="es_ES">
+<html lang="es_AR">
 <head>
 <meta charset="UTF-8">
 <title>Lista de Productos</title>
@@ -18,7 +18,7 @@
 	<jsp:include page="_header.jsp" />
 	<jsp:include page="_menu.jsp" />
 
-	<fmt:setLocale value="en_ES" scope="session" />
+	<fmt:setLocale value="es_AR" scope="session" />
 
 	<div class="page-title">Lista de Productos</div>
 
@@ -38,7 +38,7 @@
 						Ordenar</a></li>
 				<!-- For Manager edit Product -->
 				<security:authorize access="hasRole('ROLE_MANAGER')">
-					<li><a style="color: yellow;"
+					<li><a style="color: green;"
 						href="${pageContext.request.contextPath}/product?code=${prodInfo.code}">
 							Editar Producto</a></li>
 					<li><a style="color: red;"

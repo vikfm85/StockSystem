@@ -2,7 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
-<html lang="es_ES">
+<html lang="es_AR">
 <head>
 <meta charset="UTF-8">
 <title>Producto</title>

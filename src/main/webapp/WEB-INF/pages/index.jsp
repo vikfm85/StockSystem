@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es_ES">
+<html lang="es_AR">
 <head>
 <meta charset="UTF-8">
 
@@ -16,7 +16,7 @@
 
 	<div class="page-title">Sistema de Stock Online</div>
 
-	<div class="demo-container">
+	<div class="start-container">
 		<h3>Contenido</h3>
 
 		<ul>

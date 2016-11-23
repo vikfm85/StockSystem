@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html lang="es_ES">
+<html lang="es_AR">
 <head>
 <meta charset="UTF-8">
 
@@ -16,7 +16,7 @@
 
 	<jsp:include page="_menu.jsp" />
 
-	<fmt:setLocale value="en_ES" scope="session" />
+	<fmt:setLocale value="es_AR" scope="session" />
 
 	<div class="page-title">Confirmar</div>
 

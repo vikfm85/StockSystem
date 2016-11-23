@@ -4,7 +4,8 @@
 
 <div class="footer-container">
 
-	@Copy right <a href="http://www.ingenieriaest.iese.edu.ar" target="_blank">EST</a>
-	
+	@Copyright <a href="http://www.ingenieriaest.iese.edu.ar"
+		target="_blank">EST</a>
+
 
 </div>

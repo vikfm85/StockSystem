@@ -20,6 +20,8 @@ public class PaginationResult<E> {
 	private List<Integer> navigationPages;
 
 	// @page: 1, 2, ..
+
+	@SuppressWarnings("unchecked")
 	public PaginationResult(Query query, int page, int maxResult, int maxNavigationPage) {
 		final int pageIndex = page - 1 < 0 ? 0 : page - 1;
 
@@ -28,7 +30,7 @@ public class PaginationResult<E> {
 
 		ScrollableResults resultScroll = query.scroll(ScrollMode.SCROLL_INSENSITIVE);
 
-		List results = new ArrayList();
+		List<E> results = new ArrayList<E>();
 
 		boolean hasResult = resultScroll.first();
 

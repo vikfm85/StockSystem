@@ -120,6 +120,7 @@ public class OrderDAOImpl implements OrderDAO {
 				order.getCustomerAddress(), order.getCustomerEmail(), order.getCustomerPhone());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
 		String sql = "Select new " + OrderDetailInfo.class.getName() //

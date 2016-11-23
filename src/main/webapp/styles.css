@@ -70,7 +70,7 @@ body {
 	margin: 5px 0px;
 }
 
-.demo-container, .login-container, .account-container {
+.start-container, .login-container, .account-container {
 	padding: 5px;
 	border: 1px solid #ccc;
 	text-align: left;

@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html lang="es_ES">
+<html lang="es_AR">
 <head>
 <meta charset="UTF-8">
 <title>Lista de Producto</title>
@@ -15,7 +15,7 @@
 	<jsp:include page="_header.jsp" />
 	<jsp:include page="_menu.jsp" />
 
-	<fmt:setLocale value="es_ES" scope="session" />
+	<fmt:setLocale value="es_AR" scope="session" />
 
 	<div class="page-title">Lista de Orden</div>
 
@@ -43,7 +43,7 @@
 						value="${orderInfo.amount}" type="currency" /></td>
 				<td><a
 					href="${pageContext.request.contextPath}/order?orderId=${orderInfo.id}">
-						View</a></td>
+						Ver</a></td>
 			</tr>
 		</c:forEach>
 	</table>

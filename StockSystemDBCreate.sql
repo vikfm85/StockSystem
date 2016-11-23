@@ -58,17 +58,17 @@ insert into Accounts (USER_NAME, ACTIVE, PASSWORD, USER_ROLE)
 values ('manager', 1, '123', 'MANAGER');
  
 ----------------
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S001', 'Core Java', 100, SYSDATE() );
+insert into Products (CODE, NAME, PRICE, CREATE_DATE)
+values ('S001', 'Test1', 100, SYSDATE() );
  
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S002', 'Spring for Beginners', 50, SYSDATE() );
+insert into Products (CODE, NAME, PRICE, CREATE_DATE)
+values ('S002', 'Test2', 50, SYSDATE() );
  
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S003', 'Swift for Beginners', 120, SYSDATE() );
+insert into Products (CODE, NAME, PRICE, CREATE_DATE)
+values ('S003', 'Test3', 120, SYSDATE() );
  
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S004', 'Oracle XML Parser', 120, SYSDATE() );
+insert into Products (CODE, NAME, PRICE, CREATE_DATE)
+values ('S004', 'Test4', 120, SYSDATE() );
  
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S005', 'CSharp Tutorial for Beginers', 110, SYSDATE() );
+insert into Products (CODE, NAME, PRICE, CREATE_DATE)
+values ('S005', 'Test5', 110, SYSDATE() );

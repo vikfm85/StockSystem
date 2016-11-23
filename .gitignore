@@ -77,5 +77,6 @@ local.properties
 
 # Mac File System
 .DS_Store
+._*
 
 

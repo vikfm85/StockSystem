@@ -75,7 +75,7 @@ local.properties
 # Code Recommenders
 .recommenders/
 
-# File System
+# Mac File System
 .DS_Store
 
 

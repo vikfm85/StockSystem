@@ -7,6 +7,13 @@ import org.hibernate.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
 
+/**
+ * Clase donde se encuentran distintos metodos utilizados en las views
+ * 
+ * @author vikfm1985
+ *
+ * @param <E>
+ */
 public class PaginationResult<E> {
 
 	private int totalRecords;
@@ -19,7 +26,7 @@ public class PaginationResult<E> {
 
 	private List<Integer> navigationPages;
 
-	// @page: 1, 2, ..
+	// Pagina: 1, 2, ..
 
 	@SuppressWarnings("unchecked")
 	public PaginationResult(Query query, int page, int maxResult, int maxNavigationPage) {
@@ -35,7 +42,7 @@ public class PaginationResult<E> {
 		boolean hasResult = resultScroll.first();
 
 		if (hasResult) {
-			// Scroll to position:
+
 			hasResult = resultScroll.scroll(fromRecordIndex);
 
 			if (hasResult) {
@@ -47,10 +54,10 @@ public class PaginationResult<E> {
 						&& resultScroll.getRowNumber() < maxRecordIndex);
 
 			}
-			// Go to last record.
+			// Ir al ultimo registro.
 			resultScroll.last();
 		}
-		// Total records.
+		// Registros Totales.
 		this.totalRecords = resultScroll.getRowNumber() + 1;
 		this.currentPage = pageIndex + 1;
 		this.list = results;
@@ -75,7 +82,7 @@ public class PaginationResult<E> {
 		int begin = current - this.maxNavigationPage / 2;
 		int end = current + this.maxNavigationPage / 2;
 
-		// First page
+		// Primer pagina
 		navigationPages.add(1);
 		if (begin > 2) {
 			// For '...'

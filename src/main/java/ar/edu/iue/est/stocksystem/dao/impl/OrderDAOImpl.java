@@ -24,7 +24,12 @@ import ar.edu.iue.est.stocksystem.model.OrderDetailInfo;
 import ar.edu.iue.est.stocksystem.model.OrderInfo;
 import ar.edu.iue.est.stocksystem.model.PaginationResult;
 
-//Transactional for Hibernate
+/**
+ * Implementacion del OrderDAO para hibernate
+ * 
+ * @author vikfm1985
+ *
+ */
 @Transactional
 public class OrderDAOImpl implements OrderDAO {
 
@@ -82,8 +87,8 @@ public class OrderDAOImpl implements OrderDAO {
 			session.persist(detail);
 		}
 
-		// Set OrderNum for report.
-		// Set OrderNum để thông báo cho người dùng.
+		// Seteo el OrderNum para reporte.
+
 		cartInfo.setOrderNum(orderNum);
 	}
 

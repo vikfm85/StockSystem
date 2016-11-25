@@ -31,10 +31,15 @@ import ar.edu.iue.est.stocksystem.model.PaginationResult;
 import ar.edu.iue.est.stocksystem.model.ProductInfo;
 import ar.edu.iue.est.stocksystem.validator.ProductInfoValidator;
 
+/**
+ * Clase del controlador del Admin (Manager)
+ * 
+ * @author vikfm1985
+ *
+ */
 @Controller
-// Enable Hibernate Transaction.
+// Habilita las transacciones con Hibernate.
 @Transactional
-// Need to use RedirectAttributes
 @EnableWebMvc
 public class AdminController {
 
@@ -47,7 +52,7 @@ public class AdminController {
 	@Autowired
 	private ProductInfoValidator productInfoValidator;
 
-	// Configurated In ApplicationContextConfig.
+	// Configurado en ApplicationContextConfig.
 	@SuppressWarnings("unused")
 	@Autowired
 	private ResourceBundleMessageSource messageSource;
@@ -62,12 +67,12 @@ public class AdminController {
 
 		if (target.getClass() == ProductInfo.class) {
 			dataBinder.setValidator(productInfoValidator);
-			// For upload Image.
+			// Para Subir Imagenes.
 			dataBinder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 		}
 	}
 
-	// GET: Show Login Page
+	// GET: Muestra la pag de Login
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login(Model model) {
 
@@ -88,7 +93,7 @@ public class AdminController {
 			productDAO.delete(productInfo);
 
 		}
-		// Redirect to productList page.
+		// Redirecciona a la pagina productList.
 		return "redirect:/productList";
 	}
 
@@ -122,7 +127,7 @@ public class AdminController {
 		return "orderList";
 	}
 
-	// GET: Show product.
+	// GET: Muestra el Producto.
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	public String product(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
 		ProductInfo productInfo = null;
@@ -138,9 +143,9 @@ public class AdminController {
 		return "product";
 	}
 
-	// POST: Save product
+	// POST: Guarda el producto
 	@RequestMapping(value = { "/product" }, method = RequestMethod.POST)
-	// Avoid UnexpectedRollbackException (See more explanations)
+	// Evita la excepcion UnexpectedRollbackException
 	@Transactional(propagation = Propagation.NEVER)
 	public String productSave(Model model, //
 			@ModelAttribute("productForm") @Validated ProductInfo productInfo, //
@@ -153,10 +158,10 @@ public class AdminController {
 		try {
 			productDAO.save(productInfo);
 		} catch (Exception e) {
-			// Need: Propagation.NEVER?
+
 			String message = e.getMessage();
 			model.addAttribute("message", message);
-			// Show product form.
+			// Muestra el form del producto.
 			return "product";
 
 		}

@@ -16,7 +16,12 @@ import ar.edu.iue.est.stocksystem.entity.Product;
 import ar.edu.iue.est.stocksystem.model.PaginationResult;
 import ar.edu.iue.est.stocksystem.model.ProductInfo;
 
-// Transactional for Hibernate
+/**
+ * Implementacion del ProductDAO para hibernate
+ * 
+ * @author vikfm1985
+ *
+ */
 @Transactional
 public class ProductDAOImpl implements ProductDAO {
 
@@ -68,8 +73,7 @@ public class ProductDAOImpl implements ProductDAO {
 		if (isNew) {
 			this.sessionFactory.getCurrentSession().persist(product);
 		}
-		// If error in DB, Exceptions will be thrown out immediately
-
+		// Si existe un error en la DV, la excion sera arrojada inmediatamente.
 		this.sessionFactory.getCurrentSession().flush();
 	}
 
@@ -108,7 +112,6 @@ public class ProductDAOImpl implements ProductDAO {
 			product = this.findProduct(code);
 		}
 		this.sessionFactory.getCurrentSession().delete(product);
-		// If error in DB, Exceptions will be thrown out immediately
 
 		this.sessionFactory.getCurrentSession().flush();
 	}

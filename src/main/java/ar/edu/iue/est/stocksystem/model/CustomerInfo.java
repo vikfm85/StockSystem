@@ -1,5 +1,11 @@
 package ar.edu.iue.est.stocksystem.model;
 
+/**
+ * Clase donde creo el modelo de la informacion del cliente
+ * 
+ * @author vikfm1985
+ *
+ */
 public class CustomerInfo {
 
 	private String name;

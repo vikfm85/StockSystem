@@ -11,6 +11,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * Entidad Product que sera persistida en la BD en la tabla Products
+ * 
+ * @author vikfm1985
+ *
+ */
 @Entity
 @Table(name = "Products")
 public class Product implements Serializable {
@@ -22,7 +28,6 @@ public class Product implements Serializable {
 	private double price;
 	private byte[] image;
 
-	// For sort.
 	private Date createDate;
 
 	public Product() {

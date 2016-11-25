@@ -28,23 +28,32 @@ import ar.edu.iue.est.stocksystem.dao.impl.ProductDAOImpl;
 @Configuration
 @ComponentScan("ar.edu.iue.est.stocksystem.*")
 @EnableTransactionManagement
-// Load to Environment.
+/**
+ * Cargo las distintas variables del ambiente y las distintas configuraciones
+ * del programa
+ * 
+ * @author vikfm1985
+ *
+ */
 @PropertySource("classpath:ds-hibernate-cfg.properties")
 public class ApplicationContextConfig {
 
-	// The Environment class serves as the property holder
-	// and stores all the properties loaded by the @PropertySource
+	// La clase Environment sirve para almacenar todas las propiedades cargadas
+	// por el tag @PropertySource
 	@Autowired
 	private Environment env;
 
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-		// Load property in message/validator.properties
+		// Cargas las propiedades que se encuentran en
+		// message/validator.properties
 		rb.setBasenames(new String[] { "messages/validator" });
 		return rb;
 	}
 
+	// Seteo el viewResolver que es donde va a ir a buscar las paginas jsp del
+	// programa
 	@Bean(name = "viewResolver")
 	public InternalResourceViewResolver getViewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -53,12 +62,12 @@ public class ApplicationContextConfig {
 		return viewResolver;
 	}
 
-	// Config for Upload.
+	// Configuracion para cuando deseo hacer un upload.
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
 
-		// Set Max Size...
+		// Seteo el tamaño maximo (maxSize)...
 		// commonsMultipartResolver.setMaxUploadSize(...);
 
 		return commonsMultipartResolver;
@@ -84,14 +93,14 @@ public class ApplicationContextConfig {
 	public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
 		Properties properties = new Properties();
 
-		// See: ds-hibernate-cfg.properties
+		// Leo las propiedades del archivo ds-hibernate-cfg.properties
 		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		properties.put("current_session_context_class", env.getProperty("current_session_context_class"));
 
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
-		// Package contain entity classes
+		// Package que continene las clases con las entidades
 		factoryBean.setPackagesToScan(new String[] { "ar.edu.iue.est.stocksystem.entity" });
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setHibernateProperties(properties);

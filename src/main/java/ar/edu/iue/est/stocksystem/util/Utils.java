@@ -4,19 +4,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.iue.est.stocksystem.model.CartInfo;
 
+/**
+ * Clase de utilidades
+ * 
+ * @author vikfm1985
+ *
+ */
 public class Utils {
 
-	// Products in Cart, stored in Session.
+	// Productos en el carro, guardados en la sesion.
 	public static CartInfo getCartInSession(HttpServletRequest request) {
 
-		// Get Cart from Session.
+		// Obtener el carro de la sesion.
 		CartInfo cartInfo = (CartInfo) request.getSession().getAttribute("myCart");
 
-		// If null, create it.
+		// Si es nulo, lo creo.
 		if (cartInfo == null) {
 			cartInfo = new CartInfo();
 
-			// And store to Session.
+			// Guardo la sesion.
 			request.getSession().setAttribute("myCart", cartInfo);
 		}
 

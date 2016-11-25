@@ -9,7 +9,12 @@ import ar.edu.iue.est.stocksystem.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-//Transactional for Hibernate
+/**
+ * Implementacion del DAO para hibernate
+ * 
+ * @author vikfm1985
+ *
+ */
 @Transactional
 public class AccountDAOImpl implements AccountDAO {
 

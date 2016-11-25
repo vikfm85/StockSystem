@@ -1,5 +1,11 @@
 package ar.edu.iue.est.stocksystem.model;
 
+/**
+ * Clase donde creo el modelo de la informacion detallada del carro
+ * 
+ * @author vikfm1985
+ *
+ */
 public class CartLineInfo {
 
 	private ProductInfo productInfo;

@@ -7,13 +7,18 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-// @Component: As a Bean.
+/**
+ * Clase utilizada para validar los campos del cliente
+ * 
+ * @author vikfm1985
+ *
+ */
 @Component
 public class CustomerInfoValidator implements Validator {
 
 	private EmailValidator emailValidator = EmailValidator.getInstance();
 
-	// This Validator support CustomerInfo class.
+	// Este validador soporta la clase CustomerInfo.
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return clazz == CustomerInfo.class;
@@ -23,7 +28,7 @@ public class CustomerInfoValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		CustomerInfo custInfo = (CustomerInfo) target;
 
-		// Check the fields of CustomerInfo class.
+		// Verigico los campos de la clase CustomerInfo.
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.customerForm.name");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.customerForm.email");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.customerForm.address");

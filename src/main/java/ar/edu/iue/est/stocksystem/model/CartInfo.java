@@ -3,6 +3,12 @@ package ar.edu.iue.est.stocksystem.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase donde creo el modelo de la informacion del carro
+ * 
+ * @author vikfm1985
+ *
+ */
 public class CartInfo {
 
 	private int orderNum;

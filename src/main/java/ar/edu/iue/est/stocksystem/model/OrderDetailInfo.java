@@ -1,5 +1,11 @@
 package ar.edu.iue.est.stocksystem.model;
 
+/**
+ * Clase donde creo el modelo de la informacion detallada de la orden
+ * 
+ * @author vikfm1985
+ *
+ */
 public class OrderDetailInfo {
 	private String id;
 
@@ -14,8 +20,7 @@ public class OrderDetailInfo {
 
 	}
 
-	// Using for Hibernate Query.
-	// Sử dụng cho Hibernate Query.
+	// Metodo usado para una Query de Hibernate.
 	public OrderDetailInfo(String id, String productCode, //
 			String productName, int quanity, double price, double amount) {
 		this.id = id;

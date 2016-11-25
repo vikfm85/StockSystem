@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad Account que sera persistida en la BD en la tabla Accounts
+ * 
+ * @author vikfm1985
+ *
+ */
 @Entity
 @Table(name = "Accounts")
 public class Account implements Serializable {

@@ -8,8 +8,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * Clase donde se configura la seguridad del sistema, forma de ingresar y salir
+ * del sistema por medio de un login y su logout. Manejo de los distintos roles
+ * del sistema y las tareas que estos pueden realizar
+ * 
+ * @author vikfm1985
+ *
+ */
 @Configuration
-// @EnableWebSecurity = @EnableWebMVCSecurity + Extra features
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -19,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-		// For User in database.
+		// Usuarios en la BD.
 		auth.userDetailsService(myDBAauthenticationService);
 
 	}
@@ -29,30 +36,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable();
 
-		// The pages requires login as EMPLOYEE or MANAGER.
-		// If no login, it will redirect to /login page.
+		// Las paginas que necesitan estar conectados como Empleado o Manager.
+		// Si no nos encontraramos logueados, nos redirecciona a la pag del
+		// Login.
 		http.authorizeRequests().antMatchers("/orderList", "/order", "/accountInfo")//
 				.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
 
-		// For MANAGER only.
+		// Uso exclusivo del Manager.
 		http.authorizeRequests().antMatchers("/product").access("hasRole('ROLE_MANAGER')");
 
-		// When the user has logged in as XX.
-		// But access a page that requires role YY,
-		// AccessDeniedException will throw.
+		// Metodo por el cual si no se esta autorizado para ingresar a una pag
+		// muestro la pag del error de Acceso Denegado.
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
-		// Config for Login Form
+		// Config para el Form de Login
 		http.authorizeRequests().and().formLogin()//
-				// Submit URL of login page.
-				.loginProcessingUrl("/j_spring_security_check") // Submit URL
-				.loginPage("/login")//
-				.defaultSuccessUrl("/accountInfo")//
-				.failureUrl("/login?error=true")//
-				.usernameParameter("userName")//
-				.passwordParameter("password")
-				// Config for Logout Page
-				// (Go to home page).
+				// URL del envio de la pagina de Login.
+				.loginProcessingUrl("/j_spring_security_check") // URL de envio
+				.loginPage("/login")// URL del login
+				.defaultSuccessUrl("/accountInfo")// URL de la redireccion del
+													// logueo exitoso
+				.failureUrl("/login?error=true")// URL de error
+				.usernameParameter("userName")// Parametro
+				.passwordParameter("password")// Parametro
+				// Config de la pag de Logout
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
 	}

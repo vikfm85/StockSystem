@@ -9,14 +9,19 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-// @Component: As a Bean.
+/**
+ * Clase utilizada para validar los campos del cliente
+ * 
+ * @author vikfm1985
+ *
+ */
 @Component
 public class ProductInfoValidator implements Validator {
 
 	@Autowired
 	private ProductDAO productDAO;
 
-	// This Validator support ProductInfo class.
+	// Este validador soporta la clase ProductInfo.
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return clazz == ProductInfo.class;
@@ -26,7 +31,7 @@ public class ProductInfoValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ProductInfo productInfo = (ProductInfo) target;
 
-		// Check the fields of ProductInfo class.
+		// Verifico los campos de la clase ProductInfo.
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");

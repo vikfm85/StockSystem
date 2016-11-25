@@ -4,6 +4,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import ar.edu.iue.est.stocksystem.entity.Product;
 
+/**
+ * Clase donde creo el modelo de la informacion del producto
+ * 
+ * @author vikfm1985
+ *
+ */
 public class ProductInfo {
 	private String code;
 	private String name;
@@ -11,7 +17,7 @@ public class ProductInfo {
 
 	private boolean newProduct = false;
 
-	// Upload file.
+	// Subo archivo.
 	private CommonsMultipartFile fileData;
 
 	public ProductInfo() {
@@ -23,7 +29,6 @@ public class ProductInfo {
 		this.price = product.getPrice();
 	}
 
-	
 	public ProductInfo(String code, String name, double price) {
 		this.code = code;
 		this.name = name;

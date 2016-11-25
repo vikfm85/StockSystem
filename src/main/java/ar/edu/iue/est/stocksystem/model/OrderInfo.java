@@ -3,6 +3,12 @@ package ar.edu.iue.est.stocksystem.model;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Clase donde creo el modelo de la informacion de la orden
+ * 
+ * @author vikfm1985
+ *
+ */
 public class OrderInfo {
 
 	private String id;
@@ -21,7 +27,7 @@ public class OrderInfo {
 
 	}
 
-	// Using for Hibernate Query.
+	// Metodo usado para una Query e Hibernate.
 	public OrderInfo(String id, Date orderDate, int orderNum, //
 			double amount, String customerName, String customerAddress, //
 			String customerEmail, String customerPhone) {

@@ -13,24 +13,30 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * Clase donde se configura el patron de diseño MVC utilizado para el desarrollo
+ * del sistema
+ * 
+ * @author vikfm1985
+ *
+ */
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	private static final Charset UTF8 = Charset.forName("UTF-8");
 
-	// Config UTF-8 Encoding.
+	// Configuro el Encoding en UTF-8.
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
 		stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8)));
 		converters.add(stringConverter);
 
-		// Add other converters ...
 	}
 
-	// Static Resource Config
-	// equivalents for <mvc:resources/> tags
+	// Configuracion de Recursos Estaticos
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
@@ -38,7 +44,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
 	}
 
-	// equivalent for <mvc:default-servlet-handler/> tag
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

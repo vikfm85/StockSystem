@@ -14,6 +14,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Clase donde se implementa la autenticacion para loguearse utilizando los
+ * datos de la tabla account que se encuentra en el Schema de MySql
+ * 
+ * @author vikfm1985
+ *
+ */
 @Service
 public class MyDBAuthenticationService implements UserDetailsService {
 
@@ -31,12 +38,16 @@ public class MyDBAuthenticationService implements UserDetailsService {
 					+ username + " was not found in the database");
 		}
 
-		// EMPLOYEE,MANAGER,..
+		/**
+		 * Obtengo los roles
+		 */
 		String role = account.getUserRole();
 
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 
-		// ROLE_EMPLOYEE, ROLE_MANAGER
+		/**
+		 * ROLE_EMPLOYEE, ROLE_MANAGER
+		 */
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
 
 		grantList.add(authority);
@@ -46,6 +57,10 @@ public class MyDBAuthenticationService implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
+		/**
+		 * Creo el detalle del usuario con los datos necesarios para
+		 * autenticarme y lo retorno para su posterior uso
+		 */
 		UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
 				account.getPassword(), enabled, accountNonExpired, //
 				credentialsNonExpired, accountNonLocked, grantList);

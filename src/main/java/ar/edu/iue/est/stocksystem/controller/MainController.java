@@ -30,10 +30,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Controlador utilizado por las distintas paginas del programa
+ * 
+ * @author vikfm1985
+ *
+ */
 @Controller
-// Enable Hibernate Transaction.
 @Transactional
-// Need to use RedirectAttributes
 @EnableWebMvc
 public class MainController {
 
@@ -54,14 +58,13 @@ public class MainController {
 		}
 		System.out.println("Target=" + target);
 
-		// For Cart Form.
-		// (@ModelAttribute("cartForm") @Validated CartInfo cartForm)
+		// Para el Cart Form.
+
 		if (target.getClass() == CartInfo.class) {
 
 		}
-		// For Customer Form.
-		// (@ModelAttribute("customerForm") @Validated CustomerInfo
-		// customerForm)
+		// Para el Customer Form.
+
 		else if (target.getClass() == CustomerInfo.class) {
 			dataBinder.setValidator(customerInfoValidator);
 		}
@@ -78,7 +81,7 @@ public class MainController {
 		return "index";
 	}
 
-	// Product List page.
+	// Pagina Product List.
 	@RequestMapping({ "/productList" })
 	public String listProductHandler(Model model, //
 			@RequestParam(value = "name", defaultValue = "") String likeName,
@@ -103,14 +106,14 @@ public class MainController {
 		}
 		if (product != null) {
 
-			// Cart info stored in Session.
+			// Muestra la informacion del carro guardado en la Sesion.
 			CartInfo cartInfo = Utils.getCartInSession(request);
 
 			ProductInfo productInfo = new ProductInfo(product);
 
 			cartInfo.addProduct(productInfo, 1);
 		}
-		// Redirect to shoppingCart page.
+		// Redirecciona a la pagina shoppingCart.
 		return "redirect:/shoppingCart";
 	}
 
@@ -123,7 +126,7 @@ public class MainController {
 		}
 		if (product != null) {
 
-			// Cart Info stored in Session.
+			// Informacion del Carrito guardado en la Sesion.
 			CartInfo cartInfo = Utils.getCartInSession(request);
 
 			ProductInfo productInfo = new ProductInfo(product);
@@ -131,11 +134,11 @@ public class MainController {
 			cartInfo.removeProduct(productInfo);
 
 		}
-		// Redirect to shoppingCart page.
+
 		return "redirect:/shoppingCart";
 	}
 
-	// POST: Update quantity of products in cart.
+	// POST: Actualiza la cantidad de productos en el carrito.
 	@RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.POST)
 	public String shoppingCartUpdateQty(HttpServletRequest request, //
 			Model model, //
@@ -144,11 +147,10 @@ public class MainController {
 		CartInfo cartInfo = Utils.getCartInSession(request);
 		cartInfo.updateQuantity(cartForm);
 
-		// Redirect to shoppingCart page.
 		return "redirect:/shoppingCart";
 	}
 
-	// GET: Show Cart
+	// GET: Muestra el carro
 	@RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.GET)
 	public String shoppingCartHandler(HttpServletRequest request, Model model) {
 		CartInfo myCart = Utils.getCartInSession(request);
@@ -157,16 +159,15 @@ public class MainController {
 		return "shoppingCart";
 	}
 
-	// GET: Enter customer information.
+	// GET: Obtiene informacion del cliente.
 	@RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
 	public String shoppingCartCustomerForm(HttpServletRequest request, Model model) {
 
 		CartInfo cartInfo = Utils.getCartInSession(request);
 
-		// Cart is empty.
+		// Carro vacio
 		if (cartInfo.isEmpty()) {
 
-			// Redirect to shoppingCart page.
 			return "redirect:/shoppingCart";
 		}
 
@@ -180,7 +181,7 @@ public class MainController {
 		return "shoppingCartCustomer";
 	}
 
-	// POST: Save customer information.
+	// POST: Guarda informacion del cliente.
 	@RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.POST)
 	public String shoppingCartCustomerSave(HttpServletRequest request, //
 			Model model, //
@@ -188,10 +189,10 @@ public class MainController {
 			BindingResult result, //
 			final RedirectAttributes redirectAttributes) {
 
-		// If has Errors.
+		// Si hay errores.
 		if (result.hasErrors()) {
 			customerForm.setValid(false);
-			// Forward to reenter customer info.
+			// Forward para reingresar la informacion del cliente.
 			return "shoppingCartCustomer";
 		}
 
@@ -200,55 +201,54 @@ public class MainController {
 
 		cartInfo.setCustomerInfo(customerForm);
 
-		// Redirect to Confirmation page.
+		// Redirecciona a la pagina de confirmacion.
 		return "redirect:/shoppingCartConfirmation";
 	}
 
-	// GET: Review Cart to confirm.
+	// GET: Revisar Carro para confirmar.
 	@RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.GET)
 	public String shoppingCartConfirmationReview(HttpServletRequest request, Model model) {
 		CartInfo cartInfo = Utils.getCartInSession(request);
 
-		// Cart have no products.
+		// Carro Vacio.
 		if (cartInfo.isEmpty()) {
-			// Redirect to shoppingCart page.
+
 			return "redirect:/shoppingCart";
 		} else if (!cartInfo.isValidCustomer()) {
-			// Enter customer info.
+			// Ingresar informacion de cliente.
 			return "redirect:/shoppingCartCustomer";
 		}
 
 		return "shoppingCartConfirmation";
 	}
 
-	// POST: Send Cart (Save).
+	// POST: Guardar el carro.
 	@RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.POST)
-	// Avoid UnexpectedRollbackException (See more explanations)
+
 	@Transactional(propagation = Propagation.NEVER)
 	public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
 		CartInfo cartInfo = Utils.getCartInSession(request);
 
-		// Cart have no products.
+		// Carro vacio.
 		if (cartInfo.isEmpty()) {
-			// Redirect to shoppingCart page.
+
 			return "redirect:/shoppingCart";
 		} else if (!cartInfo.isValidCustomer()) {
-			// Enter customer info.
+			// Ingresar informacion del cliente.
 			return "redirect:/shoppingCartCustomer";
 		}
 		try {
 			orderDAO.saveOrder(cartInfo);
 		} catch (Exception e) {
-			// Need: Propagation.NEVER?
+
 			return "shoppingCartConfirmation";
 		}
-		// Remove Cart In Session.
+		// Remueve el carro de la sesion.
 		Utils.removeCartInSession(request);
 
-		// Store Last ordered cart to Session.
+		// Guarda la ultima orden en la sesion.
 		Utils.storeLastOrderedCartInSession(request, cartInfo);
 
-		// Redirect to successful page.
 		return "redirect:/shoppingCartFinalize";
 	}
 

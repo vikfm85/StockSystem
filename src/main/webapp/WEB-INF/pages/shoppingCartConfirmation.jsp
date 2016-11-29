@@ -23,7 +23,7 @@
 
 
 	<div class="customer-info-container">
-		<h3>Customer Information:</h3>
+		<h3>Informacion del Cliente:</h3>
 		<ul>
 			<li>Nombre: ${myCart.customerInfo.name}</li>
 			<li>Email: ${myCart.customerInfo.email}</li>
